@@ -1,7 +1,5 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "./assets/vite.svg";
-import heroImg from "./assets/hero.png";
+import { toast, ToastContainer } from "react-toastify";
 import "./App.css";
 import Navbar from "./Components/Navbar/Navbar";
 import ProgressResolve from "./Components/ProgressResolve/ProgressResolve";
@@ -15,15 +13,33 @@ const fetchPromise = async () => {
 const customerData = fetchPromise();
 
 function App() {
+  const [count, setCount] = useState(0);
+  const [data, setData] = useState([]);
+  const handleClick = (p) => {
+    toast("In-Progress Sir");
+    setCount(count + 1);
+    taskStatus(p);
+  };
+  const taskStatus = (d) => {
+    const solvedata = [...data, d];
+    return setData(solvedata);
+  };
+  // console.log(data);
   // const [count, setCount] = useState(0);
 
   return (
     <>
       <Navbar></Navbar>
-      <ProgressResolve></ProgressResolve>
+      <ProgressResolve count={count}></ProgressResolve>
 
-      <CastomersTickets customerData={customerData}></CastomersTickets>
+      <CastomersTickets
+        handleClick={handleClick}
+        customerData={customerData}
+        data={data}
+      ></CastomersTickets>
+
       <Footer></Footer>
+      <ToastContainer></ToastContainer>
     </>
   );
 }

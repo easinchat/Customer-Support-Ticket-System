@@ -1,11 +1,15 @@
 import React from "react";
 
-const CustomerTicket = ({ data }) => {
+const CustomerTicket = ({ data, handleClick }) => {
   const { createdAt, customer, description, id, priority, status, title } =
     data;
-  //   console.log(id);
+
   return (
-    <div>
+    <div
+      onClick={() => {
+        handleClick(data);
+      }}
+    >
       <div className="shadow-md p-4">
         <div className="flex justify-between ">
           <h3 className="font-bold text-xl">{title}</h3>
@@ -18,7 +22,7 @@ const CustomerTicket = ({ data }) => {
 
         <div className="flex justify-between">
           <div className="flex gap-3">
-            <p>#1001</p>
+            <p>{id}</p>
             <p className="text-red-500 font-semibold">{priority}</p>
           </div>
           <div className="flex gap-3">
