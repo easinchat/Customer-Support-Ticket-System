@@ -1,7 +1,9 @@
 import React from "react";
+import Resolve from "../Resolve/Resolve";
 
-const TaskAndResolve = ({ data }) => {
-  console.log(data.title);
+const TaskAndResolve = ({ data, resolveData, resolve, setCount }) => {
+  // console.log(data.length);
+
   return (
     <div className="ml-5">
       <div>
@@ -12,8 +14,13 @@ const TaskAndResolve = ({ data }) => {
               <div className="p-5 bg-white   ">
                 <div className="bg-[#f5f5f5] p-3 w-full mb-2 rounded-2xl">
                   <h1 className="whitespace-nowrap">{item.title}</h1>
-                  <button className="btn btn-active bg-[#02A53B] text-white w-full mt-2">
-                    Success
+                  <button
+                    className="btn btn-active bg-[#02A53B] text-white w-full mt-2"
+                    onClick={() => {
+                      resolveData(item);
+                    }}
+                  >
+                    Complete
                   </button>
                 </div>
               </div>
@@ -24,7 +31,7 @@ const TaskAndResolve = ({ data }) => {
       {/*  ``````````````````````````````````` */}
       <div className="mt-3">
         <h1 className="font-bold text-2xl mb-2">Resolved Task</h1>
-        <p>No resolved tasks yet.</p>
+        <Resolve data={data} resolve={resolve} setCount={setCount}></Resolve>
       </div>
     </div>
   );
@@ -38,3 +45,7 @@ export default TaskAndResolve;
             Success
           </button> */
 }
+//  const handleResolve = (d) => {
+//     onClick={() => handleResolve(item)}
+//   };
+// handleResolve = { handleResolve };

@@ -2,7 +2,14 @@ import React, { use, useState } from "react";
 import CustomerTicket from "../CustomerTicket/CustomerTicket";
 import TaskAndResolve from "../TaskAndResolve/TaskAndResolve";
 
-const CastomersTickets = ({ customerData, handleClick, data }) => {
+const CastomersTickets = ({
+  customerData,
+  handleClick,
+  data,
+  resolveData,
+  resolve,
+  setCount,
+}) => {
   const getData = use(customerData);
 
   // console.log(getData[0]);
@@ -19,7 +26,13 @@ const CastomersTickets = ({ customerData, handleClick, data }) => {
             ></CustomerTicket>
           ))}
         </div>
-        <TaskAndResolve data={data} handleClick={handleClick}></TaskAndResolve>
+        <TaskAndResolve
+          resolveData={resolveData}
+          data={data}
+          handleClick={handleClick}
+          resolve={resolve}
+          setCount={setCount}
+        ></TaskAndResolve>
       </div>
     </div>
   );

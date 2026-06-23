@@ -15,14 +15,25 @@ const customerData = fetchPromise();
 function App() {
   const [count, setCount] = useState(0);
   const [data, setData] = useState([]);
+  const [resolve, setResolve] = useState([]);
   const handleClick = (p) => {
     toast("In-Progress Sir");
     setCount(count + 1);
-    taskStatus(p);
+    handleComplete(p);
   };
-  const taskStatus = (d) => {
-    const solvedata = [...data, d];
-    return setData(solvedata);
+  const handleComplete = (item) => {
+    const solveData = [...data, item];
+    setData(solveData);
+    console.log(item);
+  };
+  const resolveData = (item) => {
+    console.log("resolveData is Clicked", item.id);
+    const remaining = data.filter((i) => i.id !== item.id);
+
+    setData(remaining);
+    const solve = [...resolve, item];
+    setResolve(solve);
+    setCount(count - 1);
   };
   // console.log(data);
   // const [count, setCount] = useState(0);
@@ -36,6 +47,9 @@ function App() {
         handleClick={handleClick}
         customerData={customerData}
         data={data}
+        resolveData={resolveData}
+        resolve={resolve}
+        setCount={setCount}
       ></CastomersTickets>
 
       <Footer></Footer>
